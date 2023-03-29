@@ -20,7 +20,7 @@ const reviewSchema = mongoose.Schema(
 	},
 );
 
-const userSchema = mongoose.Schema(
+const productSchema = mongoose.Schema(
 	{
 		user: {
 			type: mongoose.Schema.Types.ObjectId,

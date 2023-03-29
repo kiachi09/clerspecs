@@ -8,7 +8,9 @@
 		"start": "node server.js",
 		"server": "nodemon backend/server",
 		"client": "yarn --cwd frontend start ",
-		"dev": "concurrently \"yarn server\" \"yarn client\""
+		"dev": "concurrently \"yarn server\" \"yarn client\"",
+		"data:import": "node backend/seeder",
+		"data:destroy": "node backend/seeder -d"
 	},
 	"author": "kiachi09 <dushyantrai1941@gmail.com>",
 	"license": "MIT",
@@ -18,6 +20,7 @@
 		"colors": "^1.4.0",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
+		"express-async-handler": "^1.2.0",
 		"mongoose": "^7.0.3"
 	},
 	"devDependencies": {

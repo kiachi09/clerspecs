@@ -1,6 +1,5 @@
 const products = [
 	{
-		_id: '1',
 		name: 'Eyeglass 1',
 		image: '/images/image-1.jpg',
 		description:
@@ -13,7 +12,6 @@ const products = [
 		numReviews: 12,
 	},
 	{
-		_id: '2',
 		name: 'Eyeglass 2',
 		image: '/images/image-2.jpg',
 		description:
@@ -26,7 +24,6 @@ const products = [
 		numReviews: 72,
 	},
 	{
-		_id: '3',
 		name: 'Eyeglass 3',
 		image: '/images/image-3.jpg',
 		description:
@@ -39,7 +36,6 @@ const products = [
 		numReviews: 120,
 	},
 	{
-		_id: '4',
 		name: 'Eyeglass 4',
 		image: '/images/image-4.jpg',
 		description:
@@ -52,7 +48,6 @@ const products = [
 		numReviews: 220,
 	},
 	{
-		_id: '5',
 		name: 'Eyeglass 5',
 		image: '/images/image-5.jpg',
 		description:
@@ -65,7 +60,6 @@ const products = [
 		numReviews: 420,
 	},
 	{
-		_id: '6',
 		name: 'Eyeglass 6',
 		image: '/images/image-6.jpg',
 		description:
