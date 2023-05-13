@@ -4,7 +4,7 @@ import { Navbar, Container, Nav, Image, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
 
-const Header = () => {
+const Header = ({ history }) => {
 	const dispatch = useDispatch();
 	const userLogin = useSelector(state => state.userLogin);
 	const { userInfo } = userLogin;
@@ -52,9 +52,11 @@ const Header = () => {
 									<LinkContainer to="/profile">
 										<NavDropdown.Item>Profile</NavDropdown.Item>
 									</LinkContainer>
-									<NavDropdown.Item onClick={logoutHandler}>
-										Log Out
-									</NavDropdown.Item>
+									<LinkContainer to="/">
+										<NavDropdown.Item onClick={logoutHandler}>
+											Log Out
+										</NavDropdown.Item>
+									</LinkContainer>
 								</NavDropdown>
 							) : (
 								<LinkContainer to="/login">
