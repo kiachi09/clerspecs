@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navbar, Container, Nav, Image, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
 
@@ -20,17 +20,11 @@ const Header = ({ history }) => {
 				variant="dark"
 				expand="lg"
 				collapseOnSelect
-				className="custom-navbar"
 			>
 				<Container>
 					<LinkContainer to="/">
 						<Navbar.Brand>
-							<Image
-								src={'/images/logo.png'}
-								fluid
-								alt="logo"
-								className="d-inline-block align-top navbar-logo"
-							/>
+							Clerspecs
 						</Navbar.Brand>
 					</LinkContainer>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />

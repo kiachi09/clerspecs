@@ -2,9 +2,7 @@ main {
 	min-height: 80vh;
 }
 
-.custom-navbar {
-	max-height: 100px;
-}
+
 
 .navbar-logo {
 	max-width: 100px;
@@ -43,6 +41,10 @@ input[type='submit'].btn-block,
 input[type='reset'] .btn-block,
 input[type='button'] .btn-block {
 	width: 100%;
+}
+
+.text-right {
+	text-align: right;
 }
 
 @media screen {
