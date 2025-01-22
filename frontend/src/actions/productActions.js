@@ -1,224 +1,449 @@
-import axios from 'axios';
+import axios from "axios";
 import {
-	PRODUCT_LIST_FAIL,
-	PRODUCT_LIST_REQUEST,
-	PRODUCT_LIST_SUCCESS,
-	PRODUCT_DETAILS_FAIL,
-	PRODUCT_DETAILS_REQUEST,
-	PRODUCT_DETAILS_SUCCESS,
-	PRODUCT_DELETE_REQUEST,
-	PRODUCT_DELETE_SUCCESS,
-	PRODUCT_DELETE_FAIL,
-	PRODUCT_CREATE_REQUEST,
-	PRODUCT_CREATE_SUCCESS,
-	PRODUCT_CREATE_FAIL,
-	PRODUCT_UPDATE_REQUEST,
-	PRODUCT_UPDATE_SUCCESS,
-	PRODUCT_UPDATE_FAIL,
-	PRODUCT_CREATE_REVIEW_REQUEST,
-	PRODUCT_CREATE_REVIEW_SUCCESS,
-	PRODUCT_CREATE_REVIEW_FAIL,
-	PRODUCT_TOP_REQUEST,
-	PRODUCT_TOP_SUCCESS,
-	PRODUCT_TOP_FAIL,
-} from '../constants/productConstants';
+  PRODUCT_LIST_FAIL,
+  PRODUCT_LIST_REQUEST,
+  PRODUCT_LIST_SUCCESS,
+  PRODUCT_DETAILS_FAIL,
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_FAIL,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
+  PRODUCT_CREATE_FAIL,
+  PRODUCT_CREATE_OFFERS_REQUEST,
+  PRODUCT_CREATE_OFFERS_SUCCESS,
+  PRODUCT_CREATE_OFFERS_FAIL,
+  PRODUCT_UPDATE_REQUEST,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAIL,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_TOP_REQUEST,
+  PRODUCT_TOP_SUCCESS,
+  PRODUCT_TOP_FAIL,
+  PRODUCT_SPEC_LIST_REQUEST,
+  PRODUCT_SPEC_LIST_SUCCESS,
+  PRODUCT_SPEC_LIST_FAIL,
+  PRODUCT_GOGGLES_LIST_REQUEST,
+  PRODUCT_GOGGLES_LIST_SUCCESS,
+  PRODUCT_GOGGLES_LIST_FAIL,
+  PRODUCT_CONTACTLENS_LIST_REQUEST,
+  PRODUCT_CONTACTLENS_LIST_SUCCESS,
+  PRODUCT_CONTACTLENS_LIST_FAIL,
+  // PRODUCT_EYEGLASS_BRANDS_LIST_REQUEST,
+  // PRODUCT_EYEGLASS_BRANDS_LIST_SUCCESS,
+  // PRODUCT_EYEGLASS_BRANDS_LIST_FAIL,
+  // PRODUCT_SUNGLASS_BRANDS_LIST_SUCCESS,
+  // PRODUCT_SUNGLASS_BRANDS_LIST_REQUEST,
+  // PRODUCT_SUNGLASS_BRANDS_LIST_FAIL,
+  // PRODUCT_BRANDS_EYEGLASS_LIST_FAIL,
+  // PRODUCT_BRANDS_EYEGLASS_LIST_REQUEST,
+  // PRODUCT_BRANDS_EYEGLASS_LIST_SUCCESS,
+  // PRODUCT_BRANDS_SUNGLASS_LIST_REQUEST,
+  // PRODUCT_BRANDS_SUNGLASS_LIST_SUCCESS,
+  // PRODUCT_BRANDS_SUNGLASS_LIST_FAIL,
+} from "../constants/productConstants";
+
+import { logout } from "./userActions";
 
 export const listProducts =
-	(keyword = '', pageNumber = '') =>
-	async dispatch => {
-		try {
-			dispatch({ type: PRODUCT_LIST_REQUEST });
+  (keyword = "", pageNumber = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST });
 
-			const { data } = await axios.get(
-				`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`,
-			);
+      const { data } = await axios.get(
+        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+      );
 
-			dispatch({
-				type: PRODUCT_LIST_SUCCESS,
-				payload: data,
-			});
-		} catch (error) {
-			dispatch({
-				type: PRODUCT_LIST_FAIL,
-				payload:
-					error.response && error.response.data.message
-						? error.response.data.message
-						: error.message,
-			});
-		}
-	};
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
-export const listProductDetials = id => async dispatch => {
-	try {
-		dispatch({ type: PRODUCT_DETAILS_REQUEST });
+// export const listProductEyeGlassBrands = () =>
+// 	async dispatch => {
+// 		try {
+// 			dispatch({ type: PRODUCT_EYEGLASS_BRANDS_LIST_REQUEST });
 
-		const { data } = await axios.get(`/api/products/${id}`);
+// 			const { data } = await axios.get(
+// 				`/api/products/brands/specs`,
+// 			);
 
-		dispatch({
-			type: PRODUCT_DETAILS_SUCCESS,
-			payload: data,
-		});
-	} catch (error) {
-		dispatch({
-			type: PRODUCT_DETAILS_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
+// 			dispatch({
+// 				type: PRODUCT_EYEGLASS_BRANDS_LIST_SUCCESS,
+// 				payload: data,
+// 			});
+// 		} catch (error) {
+// 			dispatch({
+// 				type: PRODUCT_EYEGLASS_BRANDS_LIST_FAIL,
+// 				payload:
+// 					error.response && error.response.data.message
+// 						? error.response.data.message
+// 						: error.message,
+// 			});
+// 		}
+// 	};
+
+// export const listProductSunGlassBrands = () =>
+// 		async dispatch => {
+// 			try {
+// 				dispatch({ type: PRODUCT_SUNGLASS_BRANDS_LIST_REQUEST });
+
+// 				const { data } = await axios.get(
+// 					`/api/products/brands/goggles`,
+// 				);
+
+// 				dispatch({
+// 					type: PRODUCT_SUNGLASS_BRANDS_LIST_SUCCESS,
+// 					payload: data,
+// 				});
+// 			} catch (error) {
+// 				dispatch({
+// 					type: PRODUCT_SUNGLASS_BRANDS_LIST_FAIL,
+// 					payload:
+// 						error.response && error.response.data.message
+// 							? error.response.data.message
+// 							: error.message,
+// 				});
+// 			}
+// 		};
+
+// export const listProductBrandsEyeglass = (brand) => async dispatch => {
+// 	try {
+// 		dispatch({type: PRODUCT_BRANDS_EYEGLASS_LIST_REQUEST});
+// 		const {data} = await axios.get(`/api/products/specs/${brand}`);
+
+// 		dispatch({
+// 			type: PRODUCT_BRANDS_EYEGLASS_LIST_SUCCESS,
+// 			payload: data,
+// 		});
+// 	} catch (error) {
+// 		dispatch({
+// 			type: PRODUCT_BRANDS_EYEGLASS_LIST_FAIL,
+// 			payload: error.response && error.response.data.message
+// 			? error.response.data.message
+// 			: error.message,
+// 		});
+// 	}
+// }
+
+// export const listProductBrandsSunglass = (brand) => async dispatch => {
+// 	try {
+// 		dispatch({type: PRODUCT_BRANDS_SUNGLASS_LIST_REQUEST});
+// 		const {data} = await axios.get(`/api/products/goggles/${brand}`);
+
+// 		dispatch({
+// 			type: PRODUCT_BRANDS_SUNGLASS_LIST_SUCCESS,
+// 			payload: data,
+// 		});
+// 	} catch (error) {
+// 		dispatch({
+// 			type: PRODUCT_BRANDS_SUNGLASS_LIST_FAIL,
+// 			payload: error.response && error.response.data.message
+// 			? error.response.data.message
+// 			: error.message,
+// 		});
+// 	}
+// }
+
+export const speclistProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_SPEC_LIST_REQUEST });
+
+    const { data } = await axios.get(`/api/products/specs`);
+
+    dispatch({
+      type: PRODUCT_SPEC_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_SPEC_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const ContactlensProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_CONTACTLENS_LIST_REQUEST });
+
+    const { data } = await axios.get(`/api/products/Contactlens`);
+
+    dispatch({
+      type: PRODUCT_CONTACTLENS_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CONTACTLENS_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
 
-export const deleteProduct = id => async (dispatch, getState) => {
-	try {
-		dispatch({
-			type: PRODUCT_DELETE_REQUEST,
-		});
-		const {
-			userLogin: { userInfo },
-		} = getState();
+export const listProductDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+    const { data } = await axios.get(`/api/products/${id}`);
 
-		await axios.delete(`/api/products/${id}`, config);
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const goggleslistProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_GOGGLES_LIST_REQUEST });
 
-		dispatch({
-			type: PRODUCT_DELETE_SUCCESS,
-		});
-	} catch (error) {
-		dispatch({
-			type: PRODUCT_DELETE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
+    const { data } = await axios.get(`/api/products/goggles`);
+
+    dispatch({
+      type: PRODUCT_GOGGLES_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_GOGGLES_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_DELETE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/products/${id}`, config);
+
+    dispatch({
+      type: PRODUCT_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_DELETE_FAIL,
+      payload: message,
+    });
+  }
 };
 
 export const createProduct = () => async (dispatch, getState) => {
-	try {
-		dispatch({
-			type: PRODUCT_CREATE_REQUEST,
-		});
-		const {
-			userLogin: { userInfo },
-		} = getState();
+  try {
+    dispatch({
+      type: PRODUCT_CREATE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
 
-		const { data } = await axios.post(`/api/products`, {}, config);
+    const { data } = await axios.post(`/api/products`, {}, config);
 
-		dispatch({
-			type: PRODUCT_CREATE_SUCCESS,
-			payload: data,
-		});
-	} catch (error) {
-		dispatch({
-			type: PRODUCT_CREATE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
+    dispatch({
+      type: PRODUCT_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_CREATE_FAIL,
+      payload: message,
+    });
+  }
 };
 
-export const updateProduct = product => async (dispatch, getState) => {
-	try {
-		dispatch({
-			type: PRODUCT_UPDATE_REQUEST,
-		});
-		const {
-			userLogin: { userInfo },
-		} = getState();
+export const createProductOffers = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_CREATE_OFFERS_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
 
-		const { data } = await axios.put(
-			`/api/products/${product._id}`,
-			product,
-			config,
-		);
+    const { data } = await axios.post(`/api/products/Offers`, {}, config);
 
-		dispatch({
-			type: PRODUCT_UPDATE_SUCCESS,
-			payload: data,
-		});
-	} catch (error) {
-		dispatch({
-			type: PRODUCT_UPDATE_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
+    dispatch({
+      type: PRODUCT_CREATE_OFFERS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_CREATE_OFFERS_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const updateProduct = (product) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_UPDATE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/products/${product._id}`,
+      product,
+      config
+    );
+
+    dispatch({
+      type: PRODUCT_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_UPDATE_FAIL,
+      payload: message,
+    });
+  }
 };
 
 export const createProductReview =
-	(productId, review) => async (dispatch, getState) => {
-		try {
-			dispatch({
-				type: PRODUCT_CREATE_REVIEW_REQUEST,
-			});
-			const {
-				userLogin: { userInfo },
-			} = getState();
+  (productId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-			const config = {
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${userInfo.token}`,
-				},
-			};
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-			await axios.post(`/api/products/${productId}/reviews`, review, config);
+      await axios.post(`/api/products/${productId}/reviews`, review, config);
 
-			dispatch({
-				type: PRODUCT_CREATE_REVIEW_SUCCESS,
-			});
-		} catch (error) {
-			dispatch({
-				type: PRODUCT_CREATE_REVIEW_FAIL,
-				payload:
-					error.response && error.response.data.message
-						? error.response.data.message
-						: error.message,
-			});
-		}
-	};
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_SUCCESS,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      if (message === "Not authorized, token failed") {
+        dispatch(logout());
+      }
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_FAIL,
+        payload: message,
+      });
+    }
+  };
 
-export const listTopProducts = () => async dispatch => {
-	try {
-		dispatch({ type: PRODUCT_TOP_REQUEST });
+export const listTopProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_TOP_REQUEST });
 
-		const { data } = await axios.get(`/api/products/top`);
+    const { data } = await axios.get(`/api/products/top`);
 
-		dispatch({
-			type: PRODUCT_TOP_SUCCESS,
-			payload: data,
-		});
-	} catch (error) {
-		dispatch({
-			type: PRODUCT_TOP_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
+    dispatch({
+      type: PRODUCT_TOP_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_TOP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };
